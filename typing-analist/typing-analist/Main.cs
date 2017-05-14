@@ -10,7 +10,7 @@ namespace typing_analist
     {
         static List<string> convertFromString(string inputString)
         {
-            return new List<string>(inputString.Split(' ' ));
+            return new List<string>(inputString.Split(' '));
         }
 
         [STAThread]

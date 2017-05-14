@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainWindow\MainWindowModel.cs" />
     <Compile Include="MainWindow\MainWindowPresenter.cs" />
     <Compile Include="MainWindow\MainWindowView.cs">
       <SubType>Form</SubType>

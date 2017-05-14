@@ -16,6 +16,8 @@ namespace MainWindow.MainWindow
         {
             InitializeComponent();
             m_presenter = new MainWindowPresenter(this);
+            setHighlightedWord(0,4);
+            highlightCorrect();
         }
 
         public string gimmeUserInput()
@@ -28,16 +30,22 @@ namespace MainWindow.MainWindow
             textBox1.Text = text;
         }
 
-        public void setHighlightedWorld(int startPos, int endPos)
+        public void setHighlightedWord(Tuple<int, int> t)
         {
             // TODO magic from http://stackoverflow.com/questions/11311/formatting-text-in-winform-label
-            throw new NotImplementedException();
+            linkLabel1.Links.Clear();
+
+            linkLabel1.Links.Add(t.Item1, t.Item2);
+            linkLabel1.LinkColor = Color.DarkBlue;
         }
 
-        public void highlightInputInRed()
+        public void highlightCorrect()
         {
-            // TODO
-            throw new NotImplementedException();
+            textBox1.ForeColor = Color.Blue;
+        }
+        public void highlightError()
+        {
+            textBox1.ForeColor = Color.Red;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -48,7 +56,7 @@ namespace MainWindow.MainWindow
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            Console.WriteLine("No Touchy");
         }
 
         private MainWindowPresenter m_presenter;

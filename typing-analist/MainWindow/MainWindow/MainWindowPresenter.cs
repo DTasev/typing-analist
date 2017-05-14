@@ -33,39 +33,53 @@ namespace MainWindow.MainWindow
             }
         }
 
-        private void setHighlightedWord()
+        private void handleTextChangedEvent()
         {
-            // TODO
+            // get word
+            m_model.recordKeypress();
+            string currentWord = m_view.gimmeUserInput();
+            Console.WriteLine(currentWord);
+            // run analysis magic
+            if (m_model.analysis(currentWord))
+            {
+                m_view.highlightCorrect();
+                if (m_model.isFinished(currentWord))
+                {
+                    m_model.stopWordTimer();
+                    m_view.setHighlightedWord(m_model.getNextWordLocation());
+                }
+            }
+            else
+            {
+                m_view.highlightError();
+                m_model.recordError();
+            }
+            // check if equals current word
+            // on WordSuccess, // highlight the next word
+            // on WordFailure // highlight current word with red, or actually the *field*?
         }
 
         private void setParagraphText(string text)
         {
             m_view.setParagraphText(text);
             // start timer for paragraph and word
-        }
-
-        private void handleTextChangedEvent()
-        {
-            // get word
-            string currentWord = m_view.gimmeUserInput();
-            Console.WriteLine(currentWord);
-            // run analysis magic
-            // check if equals current word
-            // on WordSuccess, // highlight the next word
-            // on WordFailure // highlight current word with red, or actually the *field*?
+            m_model.startParagraphTimer();
+            m_model.startWordTimer();
         }
 
         private void WordSuccess()
         {
-
             // stop current word timer
+            m_model.stopWordTimer();
+
         }
 
         private void WordFailure()
         {
-            m_model.registerError();
-            m_view.highlighInputInRed();
+            m_model.recordError();
+            m_view.highlightError();
         }
+
         private MainWindowView m_view;
         private MainWindowModel m_model;
     }
