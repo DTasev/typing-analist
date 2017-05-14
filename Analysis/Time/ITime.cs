@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Analysis.Time
+namespace typing_analist.Time
 {
     interface ITime
     {

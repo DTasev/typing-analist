@@ -3,36 +3,92 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Diagnostics;
+using Analysis.Time;
 
-namespace typing_analist
+namespace Analysis
 {
-    interface Analyst
+    public class Analyst : IAnalyst
     {
-        void StartParagraphTimer();
-        void EndParagraphTimer();
 
-        void StartWordTimer();
-        void EndWordTimer();
-        bool CheckCorrectness(string word);
+        private string m_paragraph;
+        private string m_currentWord;
+        private int m_currentWordStart = 0;
 
-        Time.Time ElapsedTimeForWord();
-        Time.Time ElapsedTimeForParagraph();
+        private int m_currentWordEnd;
+        private int m_errors;
 
-        // this will internally store the time it took for a key to be pressed
-        // can be calculated by CurrentTime() - LastCallTime()
-        void RegisterKeypress(char key);
+        public int CharactersPerMinute()
+        {
+            throw new NotImplementedException();
+        }
 
-        // will be calculated by the average speed for multiple words
-        // or the CharactersPerMinute / <5 character per average word>
-        int WordsPerMinute();
+        public bool Correct(string word)
+        {
+            throw new NotImplementedException();
+        }
 
-        // will be the number of registered keypresser in the range of a minute
-        int CharactersPerMinute();
+        public Time.Time ElapsedTimeForParagraph()
+        {
+            throw new NotImplementedException();
+        }
 
-        void RegisterError();
+        public Time.Time ElapsedTimeForWord()
+        {
+            throw new NotImplementedException();
+        }
 
-        // registers an error and also stores the partial word for further analysis
-        void RegisterError(string partial_word);
+        public void EndParagraphTimer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EndWordTimer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsFinished(string partial_word)
+        {
+            // check if last char is whitespace, if not return false
+            // else check return (string[:-1] == the_correct_word)
+        }
+
+        public Tuple<int, int> NextWordLocation()
+        {
+            throw new NotImplementedException();
+            // make a list with the location of _all_ spaces in the paragraph
+            // on each call just pop the first member, set that as end, and set the 
+            // previous end as start
+        }
+
+        public void RecordError()
+        {
+            m_errors++;
+        }
+
+        public void RecordError(string partial_word)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RecordKeypress(char key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartParagraphTimer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartWordTimer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int WordsPerMinute()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

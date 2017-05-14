@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace MainWindow.MainWindow
 {
     public enum MainWindowPresenterSignal
@@ -18,7 +17,7 @@ namespace MainWindow.MainWindow
         public MainWindowPresenter(MainWindowView view)
         {
             m_view = view;
-            m_model = new MainWindowModel();
+            m_model = new Analysis.Analyst();
         }
 
         public void notify(MainWindowPresenterSignal signal)
@@ -35,24 +34,19 @@ namespace MainWindow.MainWindow
 
         private void handleTextChangedEvent()
         {
+            // TODO refactor into Analysis
             // get word
-            m_model.recordKeypress();
+            m_model.RecordKeypress();
             string currentWord = m_view.gimmeUserInput();
             Console.WriteLine(currentWord);
             // run analysis magic
-            if (m_model.analysis(currentWord))
+            if (m_model.Correct(currentWord))
             {
-                m_view.highlightCorrect();
-                if (m_model.isFinished(currentWord))
-                {
-                    m_model.stopWordTimer();
-                    m_view.setHighlightedWord(m_model.getNextWordLocation());
-                }
+                WordSuccess(currentWord);
             }
             else
             {
-                m_view.highlightError();
-                m_model.recordError();
+                WordFailure(currentWord);
             }
             // check if equals current word
             // on WordSuccess, // highlight the next word
@@ -63,20 +57,25 @@ namespace MainWindow.MainWindow
         {
             m_view.setParagraphText(text);
             // start timer for paragraph and word
-            m_model.startParagraphTimer();
-            m_model.startWordTimer();
+            m_model.StartParagraphTimer();
+            m_model.StartWordTimer();
         }
 
-        private void WordSuccess()
+        private void WordSuccess(string currentWord)
         {
             // stop current word timer
-            m_model.stopWordTimer();
+            m_view.highlightCorrect();
+            if (m_model.IsFinished(currentWord))
+            {
+                m_model.StopWordTimer();
+                m_view.setHighlightedWord(m_model.getNextWordLocation());
+            }
 
         }
 
-        private void WordFailure()
+        private void WordFailure(string currentWord)
         {
-            m_model.recordError();
+            m_model.RecordError();
             m_view.highlightError();
         }
 
