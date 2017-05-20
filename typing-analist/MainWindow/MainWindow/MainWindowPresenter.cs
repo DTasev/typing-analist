@@ -112,6 +112,6 @@ namespace MainWindow.MainWindow
         }
 
         private MainWindowView m_view;
-        private Analysis.IAnalyst m_model;
+        private Analysis.Analyst m_model;
     }
 }

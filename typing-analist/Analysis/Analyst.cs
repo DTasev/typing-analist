@@ -1,65 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Analysis.Time;
-using System.Diagnostics;
 
 namespace Analysis
 {
-    class KeyRecorder : TimeRecorder
-    {
-        private List<string> m_keys;
 
-        public KeyRecorder()
-        {
-            m_keys = new List<string>();
-        }
-
-        public new Tuple<List<long>, List<string>> Records
-        {
-            get
-            {
-                return new Tuple<List<long>, List<string>>(m_records, m_keys);
-            }
-        }
-        public void AddNow(string key)
-        {
-            AddNow();
-            m_keys.Add(key);
-        }
-    }
-    class TimeRecorder
-    {
-        protected List<long> m_records;
-        protected Stopwatch m_timer;
-
-        public TimeRecorder()
-        {
-            m_timer = new Stopwatch();
-            m_records = new List<long>();
-            m_timer.Start();
-        }
-
-        public List<long> Records
-        {
-            get
-            {
-                return m_records;
-            }
-        }
-        public void AddNow()
-        {
-            m_records.Add(m_timer.ElapsedMilliseconds);
-        }
-
-        public void Stop()
-        {
-            m_timer.Stop();
-        }
-    }
-    public class Analyst : IAnalyst
+    public class Analyst
     {
 
         // The words must end with spaces, this is done to avoid a concatenation on checking
