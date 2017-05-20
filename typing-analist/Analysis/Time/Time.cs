@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Analysis.Time
 {
-    class Time : ITime
+    public class Time : ITime
     {
         public ITime Elapsed(Stopwatch to)
         {

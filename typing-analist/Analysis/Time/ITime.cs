@@ -2,7 +2,7 @@
 
 namespace Analysis.Time
 {
-    interface ITime
+    public interface ITime
     {
         // this overload allows to initialise start time in constructor
         ITime Elapsed(Stopwatch to);

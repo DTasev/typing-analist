@@ -7,21 +7,18 @@ using System.Diagnostics;
 
 namespace Analysis
 {
-    interface IAnalyst
+    public interface IAnalyst
     {
         void StartParagraphTimer();
-        void EndParagraphTimer();
+        void StopParagraphTimer();
 
         void StartWordTimer();
-        void EndWordTimer();
+        void StopWordTimer();
         bool Correct(string word);
-
-        Time.Time ElapsedTimeForWord();
-        Time.Time ElapsedTimeForParagraph();
 
         // this will internally store the time it took for a key to be pressed
         // can be calculated by CurrentTime() - LastCallTime()
-        void RecordKeypress(char key);
+        void RecordKeypress(string key);
 
         // will be calculated by the average speed for multiple words
         // or the CharactersPerMinute / <5 character per average word>
@@ -36,7 +33,18 @@ namespace Analysis
         void RecordError(string partial_word);
 
         bool IsFinished(string partial_word);
+        void MoveToNextWord();
 
-        Tuple<int, int> NextWordLocation();
+        string Paragraph();
+
+        bool IsLastWord();
+
+        Tuple<int, int> WordLocation();
+
+        Tuple<List<long>, List<string>> KeypressTimes();
+        List<long> WordTimes();
+        List<long> ParagraphTime();
+
+
     }
 }

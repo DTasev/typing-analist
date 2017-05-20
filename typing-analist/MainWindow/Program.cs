@@ -11,8 +11,7 @@ namespace MainWindow
         // Added here otherwise GUI doesn't compile
         [STAThread]
         static void Main()
-        {
-
+        { 
         }
     }
 }

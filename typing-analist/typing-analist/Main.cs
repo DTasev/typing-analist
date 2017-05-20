@@ -8,11 +8,6 @@ namespace typing_analist
 {
     class Program
     {
-        static List<string> convertFromString(string inputString)
-        {
-            return new List<string>(inputString.Split(' '));
-        }
-
         [STAThread]
         static void Main()
         {

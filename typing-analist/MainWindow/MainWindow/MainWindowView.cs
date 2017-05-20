@@ -10,46 +10,66 @@ using System.Windows.Forms;
 
 namespace MainWindow.MainWindow
 {
+    public enum WordColor
+    {
+        GOOD,
+        BAD
+    }
+
     public partial class MainWindowView : Form
     {
         public MainWindowView()
         {
             InitializeComponent();
             m_presenter = new MainWindowPresenter(this);
-            setHighlightedWord(0,4);
-            highlightCorrect();
+            this.Activate();
+            textBox1.Focus();
         }
 
-        public string gimmeUserInput()
+        public string GimmeUserInput()
         {
             return textBox1.Text;
         }
 
-        public void setParagraphText(string text)
+        public void SetParagraphText(string text)
         {
-            textBox1.Text = text;
+            linkLabel1.Text = text;
         }
 
-        public void setHighlightedWord(Tuple<int, int> t)
+        public void HighlightWord(Tuple<int, int> indices, WordColor color)
         {
             // TODO magic from http://stackoverflow.com/questions/11311/formatting-text-in-winform-label
             linkLabel1.Links.Clear();
 
-            linkLabel1.Links.Add(t.Item1, t.Item2);
-            linkLabel1.LinkColor = Color.DarkBlue;
+            linkLabel1.Links.Add(indices.Item1, indices.Item2);
+            if (color == WordColor.GOOD)
+            {
+                linkLabel1.LinkColor = Color.Green;
+            }
+            else
+            {
+                linkLabel1.LinkColor = Color.Red;
+
+            }
         }
 
-        public void highlightCorrect()
+        public void ClearUserInput()
         {
-            textBox1.ForeColor = Color.Blue;
+            textBox1.Clear();
         }
-        public void highlightError()
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            textBox1.ForeColor = Color.Red;
+            m_lastKey = e.KeyCode;
+            m_presenter.notify(MainWindowPresenterSignal.KeyPressed);
         }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            // This function is, for some reason, triggered before the presenter is initialised...
+            // so we need to check if it's been initialised or not
+            if (m_presenter == null)
+            {
+                return;
+            }
             m_presenter.notify(MainWindowPresenterSignal.TextChanged);
         }
 
@@ -60,5 +80,6 @@ namespace MainWindow.MainWindow
         }
 
         private MainWindowPresenter m_presenter;
+        public System.Windows.Forms.Keys m_lastKey;
     }
 }
