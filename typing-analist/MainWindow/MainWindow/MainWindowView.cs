@@ -38,9 +38,10 @@ namespace MainWindow.MainWindow
 
         public void HighlightWord(Tuple<int, int> indices, WordColor color)
         {
-            // TODO magic from http://stackoverflow.com/questions/11311/formatting-text-in-winform-label
+            // magic from http://stackoverflow.com/questions/11311/formatting-text-in-winform-label
             linkLabel1.Links.Clear();
 
+            // only colour in the current word!
             linkLabel1.Links.Add(indices.Item1, indices.Item2);
             if (color == WordColor.GOOD)
             {

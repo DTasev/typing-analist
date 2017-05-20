@@ -57,7 +57,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.ClientSize = new System.Drawing.Size(329, 253);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.linkLabel1);
             this.Name = "MainWindowView";
