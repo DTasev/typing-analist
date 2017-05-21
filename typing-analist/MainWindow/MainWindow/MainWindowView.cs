@@ -61,7 +61,7 @@ namespace MainWindow.MainWindow
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
             m_lastKey = e.KeyCode;
-            m_presenter.notify(MainWindowPresenterSignal.KeyPressed);
+            //m_presenter.notify(MainWindowPresenterSignal.KeyPressed);
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

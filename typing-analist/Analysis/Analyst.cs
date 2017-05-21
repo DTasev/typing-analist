@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Analysis
 {
-    using KeypressStorageType = System.String;
+    using KeypressStorageType = String;
+    using WordStorageType = String;
 
     public class Analyst
     {
@@ -30,8 +31,8 @@ namespace Analysis
 
         private int m_errors;
         private Type m_keyRecorderType = typeof(char);
-        private KeyRecorder<KeypressStorageType> m_keypresses;
-        private TimeRecorder m_wordTimer;
+        private DataRecorder<KeypressStorageType> m_keypresses;
+        private DataRecorder<WordStorageType> m_wordTimer;
         private TimeRecorder m_paragraphTimer;
 
         public Analyst(List<string> paragraph = null)
@@ -39,7 +40,7 @@ namespace Analysis
             if (paragraph == null)
             {
                 //var par = "A number of types support format strings, including all numeric types";
-                var par = "Average word length was counted in different languages though sometimes the data don't match.";
+                var par = "Linq equivalents of Map and Reduce: If you're lucky enough to have linq.";
                 m_paragraph = new List<string>(par.Split(' '));
 
                 // add a space on all except the last one
@@ -53,8 +54,8 @@ namespace Analysis
                 m_paragraph = paragraph;
             }
 
-            m_keypresses = new KeyRecorder<KeypressStorageType>();
-            m_wordTimer = new TimeRecorder();
+            m_keypresses = new DataRecorder<KeypressStorageType>();
+            m_wordTimer = new DataRecorder<WordStorageType>();
             m_paragraphTimer = new TimeRecorder();
             m_wordEnd = CurrentWord.Length - 1;
         }
@@ -129,17 +130,17 @@ namespace Analysis
             m_wordTimer.AddNow();
         }
 
-        public void StopWordTimer()
+        public void StopWordTimer(string currentWord)
         {
-            // for N words, this should be called N-1 times
-            m_wordTimer.AddNow();
+            Console.WriteLine("Word being added: " + currentWord);
+            m_wordTimer.AddNow(currentWord);
         }
 
         public Tuple<List<long>, List<KeypressStorageType>> KeypressTimes()
         {
             return m_keypresses.Records;
         }
-        public List<long> WordTimes()
+        public Tuple<List<long>, List<WordStorageType>> WordTimes()
         {
             return m_wordTimer.Records;
         }

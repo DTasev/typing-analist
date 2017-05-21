@@ -5,11 +5,11 @@ using System.Diagnostics;
 namespace Analysis
 {
     // make the list of chars, or templated with default = char
-    internal class KeyRecorder<T> : TimeRecorder
+    internal class DataRecorder<T> : TimeRecorder
     {
         private List<T> m_keys;
 
-        public KeyRecorder()
+        public DataRecorder()
         {
             m_keys = new List<T>();
         }
