@@ -41,10 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyst.cs" />
-    <Compile Include="IAnalyst.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Time\ITime.cs" />
-    <Compile Include="Time\Time.cs" />
+    <Compile Include="Recorders.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

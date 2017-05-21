@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainWindow", "MainWindow\Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analysis", "Analysis\Analysis.csproj", "{49AEC394-9E7E-49D0-B05F-7F752E2C943F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4B387C0D-395A-411C-91B7-33B00E27AF95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalysisTest", "AnalystTest\AnalysisTest.csproj", "{5240A545-CD9A-4F31-8124-A53F4F476D2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,8 +73,27 @@ Global
 		{49AEC394-9E7E-49D0-B05F-7F752E2C943F}.Release|x64.Build.0 = Release|Any CPU
 		{49AEC394-9E7E-49D0-B05F-7F752E2C943F}.Release|x86.ActiveCfg = Release|Any CPU
 		{49AEC394-9E7E-49D0-B05F-7F752E2C943F}.Release|x86.Build.0 = Release|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Debug|x64.Build.0 = Debug|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Debug|x86.Build.0 = Debug|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Release|ARM.Build.0 = Release|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Release|x64.ActiveCfg = Release|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Release|x64.Build.0 = Release|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Release|x86.ActiveCfg = Release|Any CPU
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5240A545-CD9A-4F31-8124-A53F4F476D2F} = {4B387C0D-395A-411C-91B7-33B00E27AF95}
 	EndGlobalSection
 EndGlobal

@@ -81,6 +81,12 @@ namespace MainWindow.MainWindow
         }
 
         private MainWindowPresenter m_presenter;
-        public System.Windows.Forms.Keys m_lastKey;
+        private Keys m_lastKey;
+        public string LastKey
+        {
+            get{
+                return m_lastKey.ToString();
+            }
+        }
     }
 }

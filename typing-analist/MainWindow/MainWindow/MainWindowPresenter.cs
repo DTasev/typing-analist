@@ -14,6 +14,8 @@ namespace MainWindow.MainWindow
 
     public class MainWindowPresenter
     {
+        const int AVERAGE_WORD_LENGTH = 6;
+
         public MainWindowPresenter(MainWindowView view)
         {
             m_view = view;
@@ -39,8 +41,7 @@ namespace MainWindow.MainWindow
 
         private void handleKeyPressedEvent()
         {
-            var key = m_view.m_lastKey;
-            m_model.RecordKeypress(key.ToString());
+            m_model.RecordKeypress(m_view.LastKey);
         }
 
         private void handleTextChangedEvent()
@@ -84,7 +85,32 @@ namespace MainWindow.MainWindow
                     Console.WriteLine("Average time per keypress in ms:");
                     // Subtract the first value as 'background'
                     var res = m_model.KeypressTimes();
-                    Console.WriteLine(res.Item1.Average() - res.Item1[0]);
+                    var list = res.Item1;
+                    var background = list[0];
+                    list.Select(x => x - background);
+                    
+                    var data = new List<long>(list.Count - 1);
+
+                    for(int i = 0; i < list.Count-1; ++i)
+                    {
+                        data.Add(list[i + 1] - list[i]);
+                    }
+
+                    var avg = data.Average();
+                    Console.WriteLine(avg);
+                    // see how many chars we can do in a full second (1000ms)
+                    var cps = 1000 / avg;
+                    Console.WriteLine("Chars per second:\n"+cps);
+                    // how many chars we can do in a minute
+                    var cpm = 60 * cps;
+                    Console.WriteLine("Chars per minute:\n"+cpm);
+                    // divide chars per minute to get the word length
+                    var wpm_6 = cpm / AVERAGE_WORD_LENGTH;
+                    var wpm_5 = cpm / 5;
+                    var wpm_51 = cpm / 5.1;
+                    Console.WriteLine(String.Format("Words per minute with arbitrary word length {0}:\n{1}", AVERAGE_WORD_LENGTH, wpm_6));
+                    Console.WriteLine(String.Format("Words per minute with arbitrary word length {0}:\n{1}", 5, wpm_5));
+                    Console.WriteLine(String.Format("Words per minute with arbitrary word length {0}:\n{1}", 5.1, wpm_51));
                     Console.WriteLine("All keypresses:");
                     for (int i = 0; i < res.Item1.Count; ++i)
                     {

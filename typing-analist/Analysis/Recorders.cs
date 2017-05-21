@@ -4,25 +4,28 @@ using System.Diagnostics;
 
 namespace Analysis
 {
-    internal class KeyRecorder : TimeRecorder
+    // make the list of chars, or templated with default = char
+    internal class KeyRecorder<T> : TimeRecorder
     {
-        private List<string> m_keys;
+        private List<T> m_keys;
 
         public KeyRecorder()
         {
-            m_keys = new List<string>();
+            m_keys = new List<T>();
         }
 
-        public new Tuple<List<long>, List<string>> Records
+        public new Tuple<List<long>, List<T>> Records
         {
             get
             {
-                return new Tuple<List<long>, List<string>>(m_records, m_keys);
+                return new Tuple<List<long>, List<T>>(m_records, m_keys);
             }
         }
-        public void AddNow(string key)
+        public void AddNow(T key)
         {
+            // add time from base class
             AddNow();
+            // add key
             m_keys.Add(key);
         }
     }

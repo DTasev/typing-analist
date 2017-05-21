@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Analysis
 {
+    using KeypressStorageType = System.String;
 
     public class Analyst
     {
-
         // The words must end with spaces, this is done to avoid a concatenation on checking
         // Except the last one!
-        private List<string> m_paragraph = new List<string> { "Hello ", "World ", "this ", "is ", "Rupert!" };
+        private List<string> m_paragraph;
         private int m_currentWord = 0;
 
         public string Paragraph()
@@ -29,14 +29,31 @@ namespace Analysis
         private int m_wordEnd = 0;
 
         private int m_errors;
-
-        private KeyRecorder m_keypresses;
+        private Type m_keyRecorderType = typeof(char);
+        private KeyRecorder<KeypressStorageType> m_keypresses;
         private TimeRecorder m_wordTimer;
         private TimeRecorder m_paragraphTimer;
 
-        public Analyst()
+        public Analyst(List<string> paragraph = null)
         {
-            m_keypresses = new KeyRecorder();
+            if (paragraph == null)
+            {
+                //var par = "A number of types support format strings, including all numeric types";
+                var par = "Average word length was counted in different languages though sometimes the data don't match.";
+                m_paragraph = new List<string>(par.Split(' '));
+
+                // add a space on all except the last one
+                for (int i = 0; i < m_paragraph.Count - 1; ++i)
+                {
+                    m_paragraph[i] += ' ';
+                }
+            }
+            else
+            {
+                m_paragraph = paragraph;
+            }
+
+            m_keypresses = new KeyRecorder<KeypressStorageType>();
             m_wordTimer = new TimeRecorder();
             m_paragraphTimer = new TimeRecorder();
             m_wordEnd = CurrentWord.Length - 1;
@@ -118,7 +135,7 @@ namespace Analysis
             m_wordTimer.AddNow();
         }
 
-        public Tuple<List<long>, List<string>> KeypressTimes()
+        public Tuple<List<long>, List<KeypressStorageType>> KeypressTimes()
         {
             return m_keypresses.Records;
         }
