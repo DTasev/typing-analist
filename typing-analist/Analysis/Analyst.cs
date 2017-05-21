@@ -40,7 +40,8 @@ namespace Analysis
             if (paragraph == null)
             {
                 //var par = "A number of types support format strings, including all numeric types";
-                var par = "Linq equivalents of Map and Reduce: If you're lucky enough to have linq.";
+                //var par = "Linq equivalents of Map and Reduce: If you're lucky enough to have linq.";
+                var par = "Tim Minchin was born on October, 1975, as Timothy David Minchin, and was brought up in Perth, Western Australia. He is an actor, comedian, musician, writer, and director known for Californication (2007), Larrikins (2018), and Tim Minchin and the Heritage Orchestra (2011).";
                 m_paragraph = new List<string>(par.Split(' '));
 
                 // add a space on all except the last one

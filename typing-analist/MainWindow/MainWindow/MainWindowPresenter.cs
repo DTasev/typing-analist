@@ -137,8 +137,8 @@ namespace MainWindow.MainWindow
             // Words per minute method 2
             var wps = 1000 / average_wordtime;
             var wpm_from_wps = 60 * wps;
-            Console.WriteLine(String.Format("Word per second: {0}", wps));
-            Console.WriteLine(String.Format("Word per minute: {0}", wpm_from_wps));
+            Console.WriteLine(String.Format("Words per second: {0}", wps));
+            Console.WriteLine(String.Format("Words per minute: {0}", wpm_from_wps));
 
             Console.WriteLine("Word Times:");
             for (int i = 0; i < wordtimes.Item1.Count; ++i)
