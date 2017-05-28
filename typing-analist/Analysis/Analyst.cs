@@ -35,30 +35,29 @@ namespace Analysis
         private DataRecorder<WordStorageType> m_wordTimer;
         private TimeRecorder m_paragraphTimer;
 
-        public Analyst(List<string> paragraph = null)
+        private void Initialise()
         {
-            if (paragraph == null)
-            {
-                //var par = "A number of types support format strings, including all numeric types";
-                //var par = "Linq equivalents of Map and Reduce: If you're lucky enough to have linq.";
-                var par = "Tim Minchin was born on October, 1975, as Timothy David Minchin, and was brought up in Perth, Western Australia. He is an actor, comedian, musician, writer, and director known for Californication (2007), Larrikins (2018), and Tim Minchin and the Heritage Orchestra (2011).";
-                m_paragraph = new List<string>(par.Split(' '));
-
-                // add a space on all except the last one
-                for (int i = 0; i < m_paragraph.Count - 1; ++i)
-                {
-                    m_paragraph[i] += ' ';
-                }
-            }
-            else
-            {
-                m_paragraph = paragraph;
-            }
-
             m_keypresses = new DataRecorder<KeypressStorageType>();
             m_wordTimer = new DataRecorder<WordStorageType>();
             m_paragraphTimer = new TimeRecorder();
             m_wordEnd = CurrentWord.Length - 1;
+        }
+        public Analyst(string par) : base()
+        {
+            m_paragraph = new List<string>(par.Split(' '));
+
+            // add a space on all except the last one
+            for (int i = 0; i < m_paragraph.Count - 1; ++i)
+            {
+                m_paragraph[i] += ' ';
+            }
+
+            Initialise();
+        }
+        public Analyst(List<string> paragraph = null) : base()
+        {
+            m_paragraph = paragraph;
+            Initialise();
         }
 
         public bool IsLastWord()

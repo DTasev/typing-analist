@@ -16,10 +16,10 @@ namespace MainWindow.MainWindow
     {
         const int AVERAGE_WORD_LENGTH = 6;
 
-        public MainWindowPresenter(MainWindowView view)
+        public MainWindowPresenter(MainWindowView view, string input)
         {
             m_view = view;
-            m_model = new Analysis.Analyst();
+            m_model = new Analysis.Analyst(input);
             m_view.SetParagraphText(m_model.Paragraph());
             m_view.HighlightWord(m_model.WordLocation(), WordColor.GOOD);
         }
@@ -79,7 +79,7 @@ namespace MainWindow.MainWindow
                 if (m_model.IsLastWord())
                 {
                     m_model.StopParagraphTimer();
-                    PrintOutKeyspresses();
+                    //PrintOutKeyspresses();
                     PrintOutWords();
                     Console.WriteLine("Paragraph time:");
                     m_model.ParagraphTime().ForEach(Console.WriteLine);
@@ -151,13 +151,14 @@ namespace MainWindow.MainWindow
         {
             // compute the difference between the time it took to write each word, i.e. use the word times as bin edges
             var background = input[0];
-            input.Select(x => x - background);
+            var result = input.Select(x => x - background);
 
             var output = new List<long>(input.Count - 1);
-            for (int i = 0; i < input.Count - 1; ++i)
+            for (int i = 0; i < result.Count() - 1; ++i)
             {
-                output.Add(input[i + 1] - input[i]);
+                output.Add(result.ElementAt(i+1) - result.ElementAt(i));
             }
+
 
             return output;
         }
